@@ -2,7 +2,7 @@
  * Created by MEMEME on 2016/11/13.
  */
 //  调用jsonp函数获取当前ip所在城市
-jsonp('http://webapi.amap.com/maps/ipLocation?key=608d75903d29ad471362f8c58c550daf&callback=getLocation');
+jsonp('http://api.jirengu.com/weather.php?callback=getCity');
 //页面加载完成后调用jsonp函数请求当前天气数据
 window.onload=function(){
     var cityName = document.getElementById('city').value;
@@ -12,7 +12,7 @@ window.onload=function(){
     btn.onclick=function (){
         jsonp(createUrl());
     }
-}
+};
 
 // 数据请求函数
 function jsonp (url){
@@ -99,8 +99,8 @@ function chooseImg(id,index){
 }
 
 //页面载入完成时回调函数，用来将位置信息储存起来
-function getLocation(data){
-    document.getElementById('city').value = data.city;
+function getCity(data){
+    document.getElementById('city').value = data.results[0].currentCity;
 }
 
 //根据城市名创建请求数据及url
