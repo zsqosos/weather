@@ -2,9 +2,12 @@ body,div,h1,h2,h3,h4,h5,h6,input,header,main,ul,li,footer,p,span,section{
     padding: 0;
     margin: 0;
 }
-body{
+html,body{
     height: 100%;
-    background: url(images/bg.jpg);
+    min-width: 960px;
+}
+body{
+    background: url(images/bg.jpg) no-repeat;
     font-size: 14px;
     font-family: "microsoft yahei";
     -webkit-background-size: 100%;
@@ -55,7 +58,7 @@ section{
     padding-top: 90px;
 }
 #today_container{
-    width: 65%;
+    width: 900px;
     margin: 0 auto;
     padding: 20px;
     background: rgba(100,100,100,0.3);
@@ -73,10 +76,10 @@ section{
     margin: 0 15px;
 }
  .main_info span:first-child{
-    margin: 0 15px 0 0;
+    margin-right: 15px;
 }
  .more_info {
-    margin: 3px 0 0 0;
+    margin-top: 3px;
     font-size: 16px;
 }
  .more_info span{
@@ -84,40 +87,29 @@ section{
 }
 #future_container{
     margin: 80px auto 0 auto;
+    width: 950px;
     text-align: center;
     overflow: hidden;
 }
 #future_container div{
+    float: left;
     width: 150px;
-    padding: 20px 0 20px 0;
-    margin-right: 40px;
+    padding: 20px 0;
+    margin: 0 20px;
     background: rgba(100, 100, 100, 0.3);
-    display: inline-block;
 }
 #future_container div:hover{
     background: rgba(200,200,200,0.5);
-}
-#future_container div:last-child{
-    margin: 0;
 }
 #future_container div span{
     display: block;
 }
 footer{
-    width: 100%;
     position: absolute;
     bottom: 0;
-    left: 0;
+    width: 100%;
 }
 footer div{
     width: 175px;
     margin: 0 auto;
 }
-
-
-
-
-
-
-
-
