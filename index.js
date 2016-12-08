@@ -1,36 +1,40 @@
 /**
  * Created by MEMEME on 2016/11/13.
  */
-//  µ÷ÓÃjsonpº¯Êı»ñÈ¡µ±Ç°ipËùÔÚ³ÇÊĞ
-jsonp('http://api.jirengu.com/weather.php?callback=getCity');
-//Ò³Ãæ¼ÓÔØÍê³Éºóµ÷ÓÃjsonpº¯ÊıÇëÇóµ±Ç°ÌìÆøÊı¾İ
 window.onload=function(){
-    var cityName = document.getElementById('city').value;
-    var btn=document.getElementById("btn");
-    jsonp(createUrl(cityName));
-    //µã»÷°´Å¥Ê±µ÷ÓÃjsonpº¯ÊıÇëÇóÓÃ»§ÊäÈë³ÇÊĞµÄÌìÆøÊı¾İ
+    //è°ƒç”¨jsonpå‡½æ•°è¯·æ±‚å½“å‰æ‰€åœ¨åŸå¸‚
+    jsonp('https://api.map.baidu.com/api?v=2.0&ak=Dv1NMU23dh1sGS9n2tUouDEYY96Dfzh3&s=1&callback=getCity');
+    //è¯·æ±‚å¤©æ°”è½¦æ•°æ®
     btn.onclick=function (){
         jsonp(createUrl());
     }
 };
 
-// Êı¾İÇëÇóº¯Êı
-function jsonp (url){
+function getCity(){
+    function city(result){
+        jsonp(createUrl(result.name));
+    }
+    var cityName = new BMap.LocalCity();
+    cityName.get(city);
+}
+
+// æ•°æ®è¯·æ±‚å‡½æ•°
+function jsonp(url){
     var script = document.createElement('script');
     script.src = url;
     document.body.insertBefore(script, document.body.firstChild);
     document.body.removeChild(script);
 }
 
-//Êı¾İÇëÇó³É¹¦»Øµ÷º¯Êı£¬ÓÃÓÚ½«»ñÈ¡µ½µÄÊı¾İ·ÅÈëÒ³ÃæÏàÓ¦Î»ÖÃ
+//æ•°æ®è¯·æ±‚æˆåŠŸå›è°ƒå‡½æ•°ï¼Œç”¨äºå°†è·å–åˆ°çš„æ•°æ®æ”¾å…¥é¡µé¢ç›¸åº”ä½ç½®
 function getWeather(response) {
     var oSpan = document.getElementsByClassName('info');
     var data = response.result.data;
     oSpan[0].innerHTML=data.realtime.city_name;
     oSpan[1].innerHTML=data.realtime.date;
-    oSpan[2].innerHTML=document.getElementById('week').value+data.weather[0].week;
+    oSpan[2].innerHTML='æ˜ŸæœŸ'+data.weather[0].week;
     oSpan[3].innerHTML=data.realtime.weather.info;
-    oSpan[4].innerHTML=data.realtime.weather.temperature+document.getElementById('temp').value;
+    oSpan[4].innerHTML=data.realtime.weather.temperature+'â„ƒ';
     oSpan[5].innerHTML=data.realtime.wind.direct;
     oSpan[6].innerHTML=data.realtime.weather.humidity+'%';
     oSpan[7].innerHTML=data.realtime.time;
@@ -43,15 +47,15 @@ function getWeather(response) {
     for(var i=0; i<aDiv.length; i++){
         var aSpan = aDiv[i].getElementsByClassName('future_info');
         aSpan[0].innerHTML = data.weather[i].date;
-        aSpan[1].innerHTML = document.getElementById('week').value+data.weather[i].week;
+        aSpan[1].innerHTML = 'æ˜ŸæœŸ'+data.weather[i].week;
         aSpan[2].innerHTML =data.weather[i].info.day[1];
-        aSpan[3].innerHTML = data.weather[i].info.day[2]+document.getElementById('temp').value;
+        aSpan[3].innerHTML = data.weather[i].info.day[2]+'â„ƒ';
     }
 
     changeImg(response);
 }
 
-//¸ù¾İ»ñÈ¡µ½µÄÊı¾İ¸ü¸ÄÒ³ÃæÖĞÏàÓ¦µÄÍ¼Æ¬
+//æ ¹æ®è·å–åˆ°çš„æ•°æ®æ›´æ”¹é¡µé¢ä¸­ç›¸åº”çš„å›¾ç‰‡
 function changeImg(data){
     var firstImg = document.getElementsByTagName("img")[0];
     var firstWeatherId=data.result.data.realtime.weather.img;
@@ -64,7 +68,7 @@ function changeImg(data){
     }
 }
 
-//Ñ¡ÔñÍ¼Æ¬
+//é€‰æ‹©å›¾ç‰‡
 function chooseImg(id,index){
     switch(id){
         case '0':
@@ -98,12 +102,7 @@ function chooseImg(id,index){
     }
 }
 
-//Ò³ÃæÔØÈëÍê³ÉÊ±»Øµ÷º¯Êı£¬ÓÃÀ´½«Î»ÖÃĞÅÏ¢´¢´æÆğÀ´
-function getCity(data){
-    document.getElementById('city').value = data.results[0].currentCity;
-}
-
-//¸ù¾İ³ÇÊĞÃû´´½¨ÇëÇóÊı¾İ¼°url
+//æ ¹æ®åŸå¸‚ååˆ›å»ºè¯·æ±‚æ•°æ®åŠurl
 function createUrl(){
     var cityName = '';
     if(arguments.length == 0) {
@@ -111,6 +110,6 @@ function createUrl(){
     }else{
         cityName = arguments[0];
     }
-    var url = 'http://op.juhe.cn/onebox/weather/query?cityname=' + encodeURI(cityName) + '&key=1053d001421b886dcecf81a38422a1a2&callback=getWeather';
+    var url = 'https://op.juhe.cn/onebox/weather/query?cityname=' + encodeURI(cityName) + '&key=1053d001421b886dcecf81a38422a1a2&callback=getWeather';
     return url;
 }
