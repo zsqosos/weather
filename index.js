@@ -143,7 +143,7 @@ function createUrl(){
     }
     // console.log(cityName);
     var urls = []; 
-    urls[0] = 'http://api.k780.com:88/?app=weather.future&appkey=24797&sign=5b91421723a489d8d5cb4a2e27dedea5&format=json&jsoncallback=getWeather&weaid=' + encodeURI(cityName);
-    urls[1] = 'http://api.map.baidu.com/telematics/v3/weather?output=json&ak=FK9mkfdQsloEngodbFl4FeY3&callback=getTodayWeather&location=' + encodeURI(cityName);
+    urls[0] = 'https://sapi.k780.com/?app=weather.future&appkey=24797&sign=5b91421723a489d8d5cb4a2e27dedea5&format=json&jsoncallback=getWeather&weaid=' + encodeURI(cityName);
+    urls[1] = 'https://api.map.baidu.com/telematics/v3/weather?output=json&ak=FK9mkfdQsloEngodbFl4FeY3&callback=getTodayWeather&location=' + encodeURI(cityName);
     return urls;
 }
